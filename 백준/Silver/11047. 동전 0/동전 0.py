@@ -1,15 +1,14 @@
-n, hap = map(int, input().split())
+n, N = map(int, input().split())
 
-coin=[]
 count=0
 
-for i in range(n):
-    coin.append(input())
-    
+coin = [int(input()) for _ in range(n)]
+
 coin.reverse()
-    
-for co in coin:
-    count += hap // int(co)
-    hap %= int(co)
-    
+
+for coin in coin:
+    if N//coin > 0:
+        count += N//coin
+        N %= coin
+
 print(count)
