@@ -1,0 +1,57 @@
+#1406 에디터 시간 제한 0.3초인데 시간 초과로 오류 출력 값은 맞음
+
+import sys
+
+#L 커서를 왼쪽으로 한 칸 옮김
+def LC(c):
+    if c == 0: # 커서가 문장의 맨 앞이면 무시됨
+        pass
+    else:
+        c -= 1
+    return c
+    
+#D 커서를 오른쪽으로 한 칸 옮김
+def DC(c, arr):
+    if c == len(arr): # 커서가 문장의 맨 뒤이면 무시됨
+        pass
+    else:
+        c += 1
+    return c
+    
+#B 커서 왼쪽에 있는 문자를 삭제함
+def BC(c, arr):
+    if c == 0: # 커서가 문장의 맨 앞이면 무시됨
+        pass
+    else:
+        del(arr[c-1])
+        c -= 1 #삭제로 인해 커서는 한 칸 왼쪽으로 이동한 것처럼 나타나지만, 실제로 커서의 오른쪽에 있던 문자는 그대로임
+    return c
+    
+#P $라는 문자를 커서 왼쪽에 추가함
+def PC(c, x, arr):
+    arr.insert(c, x)
+    c += 1
+    return c    
+    
+sen = list(sys.stdin.readline().strip())
+n = int(sys.stdin.readline().strip())
+
+cur = len(sen)
+
+for i in range(n):
+    c = sys.stdin.readline().strip()
+    if len(c) > 2:
+        c=c.split()
+        a, plus = c[0], c[1]
+        # sys.stdin.readline().split() 는 리스트를 반환해서 a, plus = c.split() 이렇게 쓰면 안됨 
+        cur = PC(cur, plus, sen)
+    else:
+        if c == 'L':
+            cur = LC(cur)
+        elif c == 'D':
+            cur = DC(cur, sen)
+        elif c == 'B':
+            cur = BC(cur, sen)
+
+result = ''.join(sen)
+print(result)
