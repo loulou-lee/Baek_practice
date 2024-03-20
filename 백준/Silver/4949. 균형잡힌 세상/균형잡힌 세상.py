@@ -1,7 +1,7 @@
 import sys
 
 while True:
-    #input = sys.stdin.readline
+    input = sys.stdin.readline
     a=input().rstrip()
     if a == '.':
         break
